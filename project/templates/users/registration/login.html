@@ -1,0 +1,14 @@
+<p> login </p>
+<form method='post'>
+    {% csrf_token %}
+    {% for field in form %}
+        {{field.label_tag}} <!-- show name of label --> 
+        {{field}}
+        {% for error in field.errors %}
+            <div class="error">{{ error }}</div>
+        {% endfor %} 
+    {% endfor %}  
+    <input type='submit' value='login'> 
+
+    <p> join now <a href="{% url 'register' %}">register</a></p>
+</form>    
