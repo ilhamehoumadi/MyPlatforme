@@ -1,4 +1,8 @@
-<p> login </p>
+{% load crispy_forms_tags %}
+{% block title %}login{% endblock title %}
+{% block content %}
+
+<h2> login </h2>
 <form method='post'>
     {% csrf_token %}
     {% for field in form %}
@@ -12,3 +16,4 @@
 
     <p> join now <a href="{% url 'register' %}">register</a></p>
 </form>    
+{% endblock content %}
