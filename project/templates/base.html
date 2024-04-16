@@ -10,7 +10,7 @@
         <meta content="" name="keywords">
           
             <!-- Favicons -->
-        <link href="{% static  'assets/img/logo.jpg'%}" rel="icon">
+        <link href="{% static  'assets/img/bloom-lg.png'%}" rel="icon">
         <link href="{% static  'assets/img/apple-touch-icon.png'%}" rel="apple-touch-icon">
           
             <!-- Google Fonts -->
@@ -27,15 +27,43 @@
             <!-- Template Main CSS File -->
         <link rel="stylesheet" type="text/css" href="{% static  'assets/css/style.css' %}" >
 
+        <style>
+          #header .logo {
+            display: flex;
+            align-items: center;
+          }
+          
+          #header .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none; /* Assuming you don't want underlines */
+            color: #5d7990;
+            font-size: 20px;
+            font-weight: 600;
+            font-family: "Poppins", sans-serif;
+            letter-spacing: 0.8px;
+            margin: 0;
+            padding: 0;
+          }
+          
+          #header .logo img {
+            max-height: 70px;
+            margin-left: 10px; /* Adjust this value as needed to add space between title and logo */
+          }
+        </style>
+
     </head>
     <body>
            
 
         <header id="header" class="d-flex align-items-center">
-            <div class="container d-flex align-items-center justify-content-between">
-        
-              <h1 class="logo"><a href="">HopeBloom<span>.</span></a></h1>
-              <a href="index.html" class="logo"><img src="{% static 'assets/img/logo.jpg' %}" alt=""></a>
+          <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="logo">
+                <a href="#">
+                  <img src="{% static 'assets/img/bloom.png' %}" alt="">
+                    HopeBloom
+                </a>
+            </h1>
             <!-- Fixed navbar-->
             <nav id="navbar" class="navbar">
                 <ul>
