@@ -110,8 +110,12 @@ h6 {
   background: #fff;
   transition: all 0.5s;
   z-index: 997;
-  height: 80px;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  height: 86px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+#header.fixed-top {
+  height: 70px;
 }
 #header .logo {
   display: flex;
