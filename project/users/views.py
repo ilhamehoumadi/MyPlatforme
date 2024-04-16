@@ -16,7 +16,7 @@ class ProfileView(LoginRequiredMixin,TemplateView):
     # LoginRequiredMixin : pour restreindre l'accès à une vue en utilise 
 
 class MyLoginView(LoginView):
-    template_name='users/registration/register.html'
+    template_name='users/registration/login.html'
     redirect_authenticated_user= False #login in next time directly
 
     def get_success_url(self):

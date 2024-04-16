@@ -1,7 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
+
+class CustomUser(AbstractUser):
+
+    is_donor = models.BooleanField(default=False)
+    is_association = models.BooleanField(default=False)
+    
+
+    def __str__(self):
+        return self.username
+
 
 class Profile(models.Model):
     # chaque user a un profile unique + si on supprime user , le profile sera supprimer également
