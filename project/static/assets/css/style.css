@@ -110,6 +110,7 @@ h6 {
 #header .logo {
   display: flex;
   align-items: center;
+  background-color: #ffffff;
 }
 
 #header .logo a {
