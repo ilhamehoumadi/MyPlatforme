@@ -63,11 +63,18 @@ def RegisterDonorView(request):
     if request.method == 'POST':
         form = DonorRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
+            donor = form.save(commit=False)
+            # Check if the user is authenticated
+            if request.user.is_authenticated:
+                donor.user = request.user
+            else:
+                donor.user = None  # Set user to None if not authenticated
+            donor.save()
             return redirect('registration_success_url')
     else:
         form = DonorRegistrationForm()
     return render(request, 'register_donor.html', {'form': form})
+
     
 
 def RegisterAssociationView(request):

@@ -23,7 +23,7 @@ class Donor(AbstractUser):
     )
 
 class Association(AbstractUser):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     # Add additional fields specific to UserType2
     organisation = models.CharField(max_length=100)
     
@@ -39,7 +39,7 @@ class Association(AbstractUser):
 
 class Profile(models.Model):
     # chaque user a un profile unique + si on supprime user , le profile sera supprimer également
-    user= models.OneToOneField(User,on_delete=models.CASCADE)
+    user= models.OneToOneField(User,on_delete=models.CASCADE, null=True, blank=True)
     
     avatar=models.ImageField(
         default='avatar.jpg',
