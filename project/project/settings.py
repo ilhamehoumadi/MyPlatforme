@@ -158,3 +158,5 @@ SOCIALACCOUNT_PROVIDERS = {
     },
     # Add configurations for other social media platforms here
 }
+
+AUTH_USER_MODEL = 'users.CustomUser'

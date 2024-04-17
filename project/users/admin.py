@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Profile
-from django.contrib.auth.admin import UserAdmin
-from .models import User
+#from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
 # on ajout ici tous ce qu'on peut afficher dans page administration de django
-
+admin.site.register(CustomUser)
 admin.site.register(Profile)

@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from PIL import Image
 from django.contrib.auth.models import AbstractUser
-from django.db import models
+
 # Create your models here.
 
 class CustomUser(AbstractUser):
@@ -38,7 +38,7 @@ class CustomUser(AbstractUser):
 
 class Profile(models.Model):
     # chaque user a un profile unique + si on supprime user , le profile sera supprimer également
-    user= models.OneToOneField(User,on_delete=models.CASCADE)
+    user= models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     
     avatar=models.ImageField(
         default='avatar.jpg',

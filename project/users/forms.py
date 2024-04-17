@@ -9,4 +9,21 @@ class RegistrationForm(UserCreationForm):
     
     class Meta:
         model  = CustomUser
-        fields = ('username','email','password1','password2', 'is_donor', 'is_association')
+        fields = ('username','email','password1','password2')
+class DonorRegistrationForm(RegistrationForm):
+    # Add donor-specific fields here
+    # For example:
+    occupation = forms.CharField(max_length=100)
+    # Add more fields as needed
+
+    class Meta(RegistrationForm.Meta):
+        fields = RegistrationForm.Meta.fields + ('occupation',)
+
+class AssociationRegistrationForm(RegistrationForm):
+    # Add association-specific fields here
+    # For example:
+    organization_name = forms.CharField(max_length=100)
+    # Add more fields as needed
+
+    class Meta(RegistrationForm.Meta):
+        fields = RegistrationForm.Meta.fields + ('organization_name',)
