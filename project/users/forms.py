@@ -1,6 +1,19 @@
 from django import forms 
 from django.contrib.auth.forms import UserCreationForm 
-from .models import CustomUser
+from django.contrib.auth.models import User  # Add this line
+from .models import Donor, Association
+
+class DonorRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = Donor
+        fields = ['username', 'email', 'password',]  # Add fields as needed
+
+class AssociationRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = Association
+        fields = ['username', 'email', 'password',]
+
+
 
 class RegistrationForm(UserCreationForm):
     
@@ -8,22 +21,5 @@ class RegistrationForm(UserCreationForm):
     
     
     class Meta:
-        model  = CustomUser
+        model  = User
         fields = ('username','email','password1','password2')
-class DonorRegistrationForm(RegistrationForm):
-    # Add donor-specific fields here
-    # For example:
-    occupation = forms.CharField(max_length=100)
-    # Add more fields as needed
-
-    class Meta(RegistrationForm.Meta):
-        fields = RegistrationForm.Meta.fields + ('occupation',)
-
-class AssociationRegistrationForm(RegistrationForm):
-    # Add association-specific fields here
-    # For example:
-    organization_name = forms.CharField(max_length=100)
-    # Add more fields as needed
-
-    class Meta(RegistrationForm.Meta):
-        fields = RegistrationForm.Meta.fields + ('organization_name',)

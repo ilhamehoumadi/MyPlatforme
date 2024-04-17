@@ -8,6 +8,7 @@ from .forms import RegistrationForm,DonorRegistrationForm,AssociationRegistratio
 from django.contrib.auth import login,logout
 from django.shortcuts import redirect,HttpResponseRedirect
 from django.views.generic import FormView
+from django.contrib.auth.backends import ModelBackend
 
 class HomeView(TemplateView):
     template_name = 'users/home.html'
@@ -54,44 +55,27 @@ class RegisterView(FormView):
     def form_valid(self,form):
         user= form.save()
         if user:
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(self.request,user)
         return super(RegisterView, self).form_valid(form)
     
-class RegisterDonorView(FormView):
-    redirect_authenticated_user = False
-    template_name='users/registration/register_donor.html'
-    form_class = DonorRegistrationForm
-    success_url = reverse_lazy('profile')
-
-    def dispatch(self,request,*args,**Kwargs):
-        #verified that the user are login or not 
-        if request.user.is_authenticated:
-            return redirect('profile')
-        return super().dispatch(request,*args,**Kwargs)
-
-
-    def form_valid(self,form):
-        user= form.save()
-        if user:
-            login(self.request,user)
-        return super(RegisterDonorView, self).form_valid(form)
+def RegisterDonorView(request):
+    if request.method == 'POST':
+        form = DonorRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('registration_success_url')
+    else:
+        form = DonorRegistrationForm()
+    return render(request, 'register_donor.html', {'form': form})
     
 
-class RegisterAssociationView(FormView):
-    redirect_authenticated_user = False
-    template_name='users/registration/register_association.html'
-    form_class = AssociationRegistrationForm
-    success_url = reverse_lazy('profile')
-
-    def dispatch(self,request,*args,**Kwargs):
-        #verified that the user are login or not 
-        if request.user.is_authenticated:
-            return redirect('profile')
-        return super().dispatch(request,*args,**Kwargs)
-
-
-    def form_valid(self,form):
-        user= form.save()
-        if user:
-            login(self.request,user)
-        return super(RegisterAssociationView, self).form_valid(form)
+def RegisterAssociationView(request):
+    if request.method == 'POST':
+        form = AssociationRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('registration_success_url')
+    else:
+        form = AssociationRegistrationForm()
+    return render(request, 'register_association.html', {'form': form})

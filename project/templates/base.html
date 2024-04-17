@@ -65,8 +65,9 @@
                         Sign up
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{%url 'register_donor' %}">As Donor</a></li>
-                        <li><a class="nav-link scrollto dropdown-item" href="{%url 'register_association' %}">As Association</a></li>
+                        <li><a class="dropdown-item" href="{% url 'register_donor' %}">As Donor</a></li>
+                        <li><a class="dropdown-item" href="{% url 'register_association' %}">As Association</a></li>
+
                       </ul>
                     </li>
                 </ul>

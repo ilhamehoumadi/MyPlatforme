@@ -1,44 +1,45 @@
 from django.db import models
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from PIL import Image
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import Permission
+
+
 
 # Create your models here.
 
-class CustomUser(AbstractUser):
+class Donor(AbstractUser):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # Add additional fields specific to UserType1
+    occupation = models.CharField(max_length=100)
 
-    is_donor = models.BooleanField(default=False)
-    is_association = models.BooleanField(default=False)
-    
- # Définir des related_name différents pour éviter les conflits
-    groups = models.ManyToManyField(
-        'auth.Group',
-        verbose_name=("groups"),
-        blank=True,
-        help_text=(
-            "The groups this user belongs to. A user will get all permissions "
-            "granted to each of their groups."
-        ),
-        related_name="customuser_groups",  # Changer le related_name
-        related_query_name="customuser",
-    )
+    # Add any other fields specific to UserType1
+    groups = models.ManyToManyField(Group, related_name='donor_groups')
     user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        verbose_name=("user permissions"),
-        blank=True,
-        help_text=("Specific permissions for this user."),
-        related_name="customuser_permissions",
-        related_query_name="customuser",
+        Permission,
+        related_name='donor_user_permissions',
+        blank=True
     )
 
+class Association(AbstractUser):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # Add additional fields specific to UserType2
+    organisation = models.CharField(max_length=100)
+    
+    # Add any other fields specific to UserType2
+    groups = models.ManyToManyField(Group, related_name='association_groups')
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='association_user_permissions',
+        blank=True
+    )
 
-    def __str__(self):
-        return self.username
 
 
 class Profile(models.Model):
     # chaque user a un profile unique + si on supprime user , le profile sera supprimer également
-    user= models.OneToOneField(CustomUser,on_delete=models.CASCADE)
+    user= models.OneToOneField(User,on_delete=models.CASCADE)
     
     avatar=models.ImageField(
         default='avatar.jpg',
